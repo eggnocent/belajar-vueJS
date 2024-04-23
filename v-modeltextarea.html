@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+
+    <div id="app">
+        <div>
+            <label for="">username :</label>
+            <input type="text" placeholder="username" v-model="username">
+            </div>
+            <div>
+                <label for="">adress :</label>
+                <textarea name="" id="" cols="30" rows="10" v-model="address"></textarea>
+            </div>
+            <div>
+                <p>
+                    username : {{username}}
+                </p>
+                <p>
+                    address: {{address}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+       import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        createApp({
+            data() {
+               return {
+                 username: '',
+                 address: ''
+                          }
+            },
+            methods: {
+                
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
