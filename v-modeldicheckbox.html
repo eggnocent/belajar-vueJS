@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+
+    <div id="app">
+        <div>
+            <label for="username">username :</label>
+            <input type="text" id="username" placeholder="username" v-model="username">
+        </div>
+        <div>
+            <label for="address">address :</label>
+            <textarea id="address" cols="30" rows="10" v-model="address"></textarea>
+        </div>
+        <div>
+            <label>gender:</label><br>
+            <input type="radio" id="male" value="Pria" v-model="gender">
+            <label for="male">Pria</label>
+            <input type="radio" id="female" value="Wanita" v-model="gender">
+            <label for="female">Wanita</label>
+        </div>
+        <div>
+            <label>Hobby:</label><br>
+            <input type="checkbox" id="sepakBola" value="sepak bola" v-model="hobby">
+            <label for="sepakBola">Sepak Bola</label><br>
+            <input type="checkbox" id="volly" value="volly" v-model="hobby">
+            <label for="volly">Volly</label><br>
+            <input type="checkbox" id="takraw" value="takraw" v-model="hobby">
+            <label for="takraw">Takraw</label>
+        </div>
+        <div>
+            <p>username: {{ username }}</p>
+            <p>address: {{ address }}</p>
+            <p>gender: {{ gender }}</p>
+            <p>hobby: <span v-if="hobby.length > 0">
+                <ul v-for="item in hobby">
+                    <li>{{item}}</li>
+                </ul>
+            </span>
+        </p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+        createApp({
+            data() {
+                return {
+                    username: '',
+                    address: '',
+                    gender: '',
+                    hobby: []
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
