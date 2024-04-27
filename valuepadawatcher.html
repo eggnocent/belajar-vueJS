@@ -20,8 +20,9 @@
                           }
             },
             watch: {
-                message() {
-                    console.log('whatever')
+                message(newvalue, oldvalue) {
+                    console.log('oldvalue : '+oldvalue)
+                    console.log('newvalue : '+newvalue)
                 }
             }
         }).mount('#app')
