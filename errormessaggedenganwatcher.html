@@ -3,18 +3,98 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta> hhtp-equiv="X-UA-Compatible" content="IE-edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        /* CSS untuk menengahkan form */
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Untuk membuat form berada di tengah vertikal */
+        }
+    </style>
 </head>
 
 <body>
 
-    <div id="app">
-        <div class="container">
-            <form action=""></form>
+   <div id="app" class="center-form">
+    <form action="" @submit.prevent="submitForm" class="w-50">
+        <div>
+            <label for="username">Username</label>
+            <input class="form-control" type="text" id="username" v-model="username">
+            <label for="username" class="text-danger fw-bold" v-if="usernameError">Minimal username 8 karakter</label>
         </div>
+        <div>
+            <label for="password">Password</label>
+            <input class="form-control" type="password" id="password" v-model="password">
+            <label for="password" class="text-danger fw-bold" v-if="passwordError">Minimal password 8 karakter</label>
+        </div>
+        <div>
+            <label for="passwordRetype">Retype Password</label>
+            <input class="form-control" type="password" id="passwordRetype" v-model="passwordRetype">
+            <label for="passwordRetype" class="text-danger fw-bold" v-if="passwordRetypeError">Password retype tidak sama dengan password</label>
+        </div>
+        <div class="mt-3">
+            <input class="form-control btn btn-primary" type="submit" value="Register">
+            </div>
+        </form>
     </div>
+   <script type="module">
+    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+    createApp ({
+        data() {
+            return {
+                username: '',
+                password: '',
+                passwordRetype: '',
+                usernameError: false, // Set nilai awal usernameError menjadi false
+                passwordError: false,
+                passwordRetypeError: false // Set nilai awal passwordRetypeError menjadi false
+            }
+        },
+        methods: {
+            submitForm() {
+                if (this.username.length < 8) {
+                    this.usernameError = true;
+                } else {
+                    this.usernameError = false;
+                }
+
+                // Memanggil fungsi untuk memeriksa panjang password
+                this.checkPassword();
+                // Memanggil fungsi untuk memeriksa password retype
+                this.passwordRetype();
+                
+                // Periksa apakah ada kesalahan dalam input
+                if (this.usernameError || this.passwordError || this.passwordRetypeError) {
+                    // Jika ada, hentikan pengiriman formulir
+                    return;
+                }
+
+                // Jika tidak ada kesalahan, lanjutkan dengan pengiriman formulir
+                // (Di sini Anda bisa menambahkan logika untuk mengirimkan formulir ke server)
+            },
+            checkPassword() {
+                if (this.password.length < 8) {
+                    this.passwordError = true;
+                } else {
+                    this.passwordError = false;
+                }
+            },
+            passwordRetype() {
+                if (this.passwordRetype !== this.password) {
+                    this.passwordRetypeError = true;
+                } else {
+                    this.passwordRetypeError = false;
+                }
+            }
+        }
+    }).mount('#app')
+   </script>
 </body>
+
 </html>
